@@ -1,0 +1,402 @@
+# Variables             {
+# `- General            {
+
+# Modifiers
+set $mod Mod4
+set $alt Mod1
+
+# Terminal
+set $term alacritty
+
+# Applications Launcher
+set $applauncher \
+"rofi -matching fuzzy -show drun   -theme ~/.config/rofi/pe.rasi"
+
+# Window Finder
+set $winfinder   \
+"rofi -matching fuzzy -show window -theme ~/.config/rofi/pe.rasi"
+
+
+set $exitmsg "i3-nagbar -t warning -B 'Yes, exit i3' 'i3-msg exit'"
+
+# --------------------- }
+# `- Direction Keys     {
+
+set $up    k
+set $down  j
+set $left  h
+set $right l
+
+# --------------------- }
+# `- Window Sub-keys    {
+
+# Window Move Sub-key [to another workspace][Alt key]
+set $mov Mod1
+
+# Window Position Sub-key [in floating mode]
+set $pos Shift
+
+# --------------------- }
+# `- Sizes & Position   {
+
+# Window Position Size [in floating mode]
+set $psize 1px
+
+# Window Resize Size [in floating mode]
+set $rsize 1px
+
+# Font Size
+set $fsize 0
+
+# Border Size
+set $bsize 0
+
+# --------------------- }
+# `- Workspaces         {
+
+set $_1 "1:term"
+set $_2 "2:inet"
+set $_3 "3:vids"
+set $_4 "4:talk"
+set $_5 "5:read"
+set $_6 "6:file"
+set $_7 "7"
+set $_8 "8"
+set $_9 "9"
+set $_0 "10"
+
+# --------------------- }
+# `- Colors             {
+
+set $black   #000000
+set $white   #ffffff
+set $gray    #1c1c1c
+set $grayer  #4c4c4c
+set $textfg  #8c8c8c
+set $cborder #8f8f8f
+set $cborder #0000ff
+
+# --------------------- }
+# --------------------- }
+# General               {
+
+font pango:monospace $fsize
+
+# Drag floating windows
+floating_modifier $mod
+
+hide_edge_borders none
+
+popup_during_fullscreen smart
+
+# StartUp Programs
+exec --no-startup-id ~/.config/i3/bin/init
+
+workspace_auto_back_and_forth yes
+
+for_window [class="^.*"] border pixel $bsize
+for_window [class="^.*"] title_format "%class"
+
+focus_follows_mouse yes
+
+# Assign Workspace to Specific Outputs
+#workspace $code    output VGA-0 LVDS
+#workspace $design  output LVDS
+#workspace $slicer  output VGA-0 LVDS
+#workspace $image   output LVDS
+#workspace $pcb     output LVDS
+#workspace $mixed   output LVDS
+#workspace $file    output LVDS
+#workspace $video   output VGA-0 LVDS
+#workspace $read    output VGA-0 LVDS
+#workspace $browser output VGA-0 LVDS
+#workspace $talk    output LVDS
+
+# --------------------- }
+# Applications          {
+
+# Crypto Wallets
+assign [class="monero-core"]  $_3
+assign [class="Exodus"]  $_3
+assign [class="Binance"]  $_3
+for_window [class="Exodus"]  floating disable
+
+# Browsers
+assign [class="Google-chrome"] $_2
+assign [class="firefox"]       $_2
+assign [class="Brave-browser"] $_2
+#assign [class="Luakit"]        $_2
+
+# Pdf Viewers
+assign [class="Evince"]     $_5
+assign [class="Zathura"]    $_5
+
+# Talk
+assign [class="TelegramDesktop"] $_4
+assign [class="discord"] $_4
+
+# Video
+assign [class="Vlc"]       $_3
+assign [class="mpv"]       $_3
+assign [class="smplayer"]  $_3
+
+#for_window [class="mpv"]  \
+  #floating enable,            \
+  #resize set 1280 720,        \
+  #move position 0 0
+#for_window [class="Termite"]  \
+  #floating enable,            \
+  #resize set 1280 720,        \
+  #move position 0 0
+#for_window [class="OpenSCAD"]       \
+  #floating enable,                  \
+  #resize set 1280 762,              \
+  #move position 0 -20
+
+for_window [class="feh"]  floating enable
+for_window [class="SimpleScreenRecorder"]  floating enable
+
+# --- {
+## GIT
+#assign [class="Gitk"] $mixed
+#assign [class="Gitg"] $mixed
+# Design Tools
+#assign [class="Blender"]  $design
+#assign [class="LibreCAD"] $design
+#assign [class="Freecad"]  $design
+#assign [class="OpenSCAD"] $code
+
+##
+#  resize set 1024 600,        \
+#for_window [class="Luakit"]  \
+#  floating enable,            \
+#  resize set 1366 768,        \
+#  move position 0 0
+
+# Slicer Tools
+#assign [class="Slic3r"] $slicer
+#assign [class="cura"]   $slicer
+
+#for_window [class="Gimp"]  tabbed enable
+
+# Image Tools
+#assign     [class="Gimp"]     $image
+#assign     [class="Inkscape"] $image
+#assign     [class="Eog"]      $image
+
+
+
+#assign [class="Kicad"]   $pcb
+
+# Audio
+#assign [class="Mixxx"]     $mixed
+#assign [class="Audacity"]  $mixed
+
+
+# Graphical File Manager and GParted
+#assign   [class="Pronterface.py"]   $file
+#assign   [class="Nautilus"]         $file
+#assign   [class="Gnote"]            $file
+#assign   [class="Gnome-clocks"]     $file
+#assign   [class="GParted"]          $file
+#assign   [class="Deluge"]           $file
+#assign   [class="qBittorrent"]      $file
+#assign   [class="Wps"]              $file
+#
+#for_window [class="TelegramDesktop"]  \
+#  floating enable,            \
+#  resize set 1024 575,        \
+#  move position 0 25
+
+# }
+
+# --------------------- }
+# Mappings              {
+# `- General            {
+
+# Volume control and mute
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
+bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
+bindsym XF86AudioMute        exec amixer -q set Master toggle
+
+# start a terminal
+bindsym $mod+Return    exec $term
+bindsym $mod+control+m exec $term
+
+# Applications Launcher
+bindsym $mod+m       exec $applauncher
+bindsym $mod+Shift+m exec $winfinder
+
+# bindsym $mod+m exec dmenu_run
+
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# restart i3
+bindsym $mod+Shift+r restart
+# exit i3
+bindsym $mod+Shift+e exec $exitmsg
+
+bindsym Print      exec gnome-screenshot
+bindsym $mod+Print exec gnome-screenshot -i
+
+bindsym $mod+b exec --no-startup-id ~/.config/i3/bin/kbrd
+
+
+mode "[S]hutDown [R]eboot Sus[P]end" {
+
+  bindsym S exec shutdown -h now
+  bindsym s exec shutdown -h now
+  bindsym R exec shutdown -r now
+  bindsym r exec shutdown -r now
+  bindsym P exec systemctl suspend
+  bindsym p exec systemctl suspend
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+
+}
+
+bindsym $mod+F12 mode "[S]hutDown [R]eboot Sus[P]end"
+
+# --------------------- }
+# `- Window             {
+
+# kill focused window
+bindsym $mod+q  kill
+bindsym $mod+F4 kill
+
+# change focus
+bindsym   $mod+$left    focus   left
+bindsym   $mod+$down    focus   down
+bindsym   $mod+$up      focus   up
+bindsym   $mod+$right   focus   right
+
+bindsym   $mod+Tab        focus right
+bindsym   $mod+BackSpace  focus left
+
+# Position (Shift) focused window in floating mode
+bindsym   $mod+$pos+$left    move   left  1px
+bindsym   $mod+$pos+$down    move   down  1px
+bindsym   $mod+$pos+$up      move   up    1px
+bindsym   $mod+$pos+$right   move   right 1px
+bindsym   $mod+$pos+Left     move   left  1px
+bindsym   $mod+$pos+Down     move   down  1px
+bindsym   $mod+$pos+Up       move   up    1px
+bindsym   $mod+$pos+Right    move   right 1px
+
+# --------------------- }
+# `- Workspace          {
+
+# switch to workspace
+bindsym $mod+1 workspace $_1
+bindsym $mod+2 workspace $_2
+bindsym $mod+3 workspace $_3
+bindsym $mod+4 workspace $_4
+bindsym $mod+5 workspace $_5
+bindsym $mod+6 workspace $_6
+bindsym $mod+7 workspace $_7
+bindsym $mod+8 workspace $_8
+bindsym $mod+9 workspace $_9
+bindsym $mod+0 workspace $_0
+bindsym $mod+n workspace next
+bindsym $mod+p workspace prev
+
+bindsym $mod+c workspace $_1
+bindsym $mod+d workspace $_4
+
+# move focused container to workspace
+bindsym $mod+$mov+1 move container to workspace $_1
+bindsym $mod+$mov+2 move container to workspace $_2
+bindsym $mod+$mov+3 move container to workspace $_3
+bindsym $mod+$mov+4 move container to workspace $_4
+bindsym $mod+$mov+5 move container to workspace $_5
+bindsym $mod+$mov+6 move container to workspace $_6
+bindsym $mod+$mov+7 move container to workspace $_7
+bindsym $mod+$mov+8 move container to workspace $_8
+bindsym $mod+$mov+9 move container to workspace $_9
+bindsym $mod+$mov+0 move container to workspace $_0
+
+bindsym $mod+$mov+c move container to workspace $_1
+bindsym $mod+$mov+d move container to workspace $_4
+
+# --------------------- }
+# `- Layout             {
+
+# Toggle Window Border
+bindsym Control+Shift+0 [class="^.*"] border toggle
+
+# Split in horizontal orientation
+bindsym $mod+o split h
+
+# Split in vertical orientation
+bindsym $mod+v split v
+
+# Enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# Layouts (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# Change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# Focus the parent container
+bindsym $mod+a focus parent
+
+bindsym $mod+Left  resize shrink width  11 px
+bindsym $mod+Down  resize grow height   11 px 
+bindsym $mod+Up    resize shrink height 11 px 
+bindsym $mod+Right resize grow width    11 px 
+
+# --------------------- }
+# --------------------- }
+# Colors                {
+
+client.focused          #0000ff #000000 #ffffff
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #000000 #000000 #ffffff #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+client.background       $gray
+
+# --------------------- }
+# Bar                   {
+
+bar {
+
+  #mode invisible
+  #hidden_state hide
+  #modifier $mod
+
+  #mode visible
+
+  status_command i3status --config ~/.config/i3/bar/i3status.conf
+  position bottom
+  workspace_buttons yes
+  separator_symbol " | "
+  binding_mode_indicator yes
+
+  font pango:Monospace 10
+
+  colors {
+    # class              border  backgr. text
+    background           $black
+    statusline           $white
+    active_workspace     $black  $black  $white
+    inactive_workspace   #000000 #000000  #cccccc
+    urgent_workspace     $white  $white  $black
+    focused_separator    $textfg $textfg  $white
+    focused_workspace    #0000ff #000000  #ffffff
+   #separator            $grayer
+  }
+
+}
+
+# --------------------- }

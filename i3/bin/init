@@ -1,0 +1,21 @@
+#!/bin/bash
+
+nm-applet &
+
+picom &
+
+xfce4-power-manager &
+
+feh --bg-scale --no-fehbg ~/.config/i3/img/wallpaper.png &
+
+#amixer set Beep 0 &
+#unclutter -idle 1 -jitter 2 -root &
+
+alacritty -e "tmux" &
+
+sh ~/.config/i3/bin/kbrd &
+sh ~/.screenlayout/home.sh &
+
+#luakit           &
+#telegram-desktop &
+unclutter &
