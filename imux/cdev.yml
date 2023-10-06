@@ -1,0 +1,17 @@
+root: /i/proj/cdev
+name: cdev
+
+windows:
+- core: core
+
+tree: &t loop 'tree -C --noreport --dirsfirst -L 3 /home/i/.config/cdev' 1
+#tree: &t loop 'tree -C --noreport --dirsfirst -L 2 apps' 1
+
+models:
+  core:
+    layout: "1790,127x32,0,0{80x32,0,0[80x2,0,0,78,80x27,0,3,79,80x1,0,31,80],46x32,81,0,81}"
+    panes:
+    - loop 'clear' 10
+    - nvim
+    - loop 'clear' 10
+    - *t

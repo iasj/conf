@@ -1,0 +1,15 @@
+
+root: /i/proj/nvpm/devl
+name: nvpm-development
+
+a: &a "9f0e,75x34,0,0{58x34,0,0,1,16x34,59,0,2}"
+
+windows:
+- devl: d
+
+models:
+  d:
+    layout: *a
+    panes:
+      - nvim +'Zoom'
+      - loop "tree -C --noreport -L 1 . flux flux/auto flux/seng flux/docs" 5

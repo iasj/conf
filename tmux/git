@@ -1,0 +1,31 @@
+#!/bin/bash
+
+cd $1
+staged_bg="#007700"
+staged_fg="#000000"
+
+modifed_bg="#885500"
+modifed_fg="#ffffff"
+
+git rev-parse --abbrev-ref HEAD >/dev/null
+
+if [ $? -eq 0 ]; then
+  sep=" "
+  git diff HEAD --quiet >/dev/null
+  if [ $? -ne 0 ]; then
+    color="#[fg=$modifed_fg,bg=$modifed_bg]"
+    s=" [M]"
+    sep=" "
+  fi
+  
+  git diff --no-ext-diff --cached --quiet 
+  
+  if [ $? -ne 0 ]; then
+    color="#[fg=$staged_fg,bg=$staged_bg]"
+    s=" [S]"
+    sep=" "
+  fi
+  branch=$(git rev-parse --abbrev-ref HEAD)
+  
+  echo "#[bg=$2,fg=#ff5500]$color$sep $branch$s "
+fi

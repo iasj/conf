@@ -1,0 +1,23 @@
+[user]
+	name  = Itamar Soares
+  email = iasj@pm.me
+
+[gc]
+  auto=1
+
+[merge]
+  summary=true
+
+[alias]
+  tree = git log --graph --pretty=oneline --abbrev-commit --branches
+  uncommit = reset HEAD~
+  merge = merge --no-ff
+  unstage = restore --staged
+[core]
+	excludesfile = /home/i/.gitignore
+	autocrlf = input
+	pager = less -x1,3
+[init]
+	defaultBranch = main
+[credential]
+	helper = cache --timeout 43200

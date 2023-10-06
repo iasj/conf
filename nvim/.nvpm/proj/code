@@ -1,0 +1,7 @@
+
+
+workspace Main
+   tab NeovimConfig
+    buff init: init.vim
+    buff read: README.md
+    

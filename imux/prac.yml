@@ -1,0 +1,31 @@
+root: /i/prac
+name: Practice
+
+c: &c "b078,116x29,0,0{80x29,0,0[80x1,0,0,19,80x25,\
+       0,2,20,80x1,0,28,21],35x29,81,0,22}"
+      
+cv: &cv
+  - loop "clear" 2
+  - nvim 
+  - loop "clear" 2
+  - loop "clear" 2
+cr: &cr
+  - loop "clear" 2
+  - loop "clear" 2
+  - ranger
+  - loop "clear" 2
+  - loop "clear" 2
+  - loop "clear" 2
+
+windows:
+  - lang: c
+
+models: 
+ c:
+    dir : <wname>
+    layout: *c
+    panes: *cv
+ r:
+    layout: *c
+    panes: *cr
+

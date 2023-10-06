@@ -1,0 +1,27 @@
+root: /i/ativ
+name: Activities
+
+c: &c "1790,127x32,0,0{80x32,0,0[80x2,0,0,78,80x27,0,3,79,80x1,0,31,80],46x32,81,0,81}"
+
+cv: &cv
+  - loop "clear" 2
+  - nvim 
+  - loop "clear" 2
+  - loop "clear" 2
+cr: &cr
+  - loop:
+    - tmux set status
+    - loop "clear" 2
+  - loop "clear" 2
+  - ranger
+  - loop "clear" 2
+  - tmux clock-mode
+  - loop "cal" 2
+
+windows:
+- main : m
+    
+models:
+  m:
+    layout: *c
+    panes: *cv
